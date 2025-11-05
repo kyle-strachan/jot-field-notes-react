@@ -9,7 +9,7 @@ export default function ProfileScreen() {
         try {
             await logout();
         } catch (error) {
-            Alert.alert("Logout error", "An error occurred during logout");
+            Alert.alert("Logout error", "An error occurred during logout. Please try again.");
         }
     }
 
@@ -21,6 +21,7 @@ export default function ProfileScreen() {
                     source={require("../assets/profile-placeholder.png")}
                 />
                 <Text style={styles.username}>{user?.username}</Text>
+                <Text style={styles.userId}>UserId: {user?.id}</Text>
             </View>
             <View style={styles.footerButtons}>
                 <CustomButton title="Logout" onPress={handleLogout} baseColor={"#e75454ff"} outline="true" />
@@ -46,6 +47,10 @@ const styles = StyleSheet.create({
     username: {
         fontSize: 24,
         fontWeight: "bold",
+        textAlign: "center"
+    },
+    userId: {
+        fontSize: 14,
         textAlign: "center"
     },
     footerButtons: {
