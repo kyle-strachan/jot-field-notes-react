@@ -17,7 +17,7 @@ This project has been converted from my mid-term note-taking app.
 
 ## Installation
 ```
-git clone https://github.com/kyle-strachan/.git
+git clone https://github.com/kyle-strachan/jot-field-notes-react.git
 cd jot_app
 npm install
 ```
@@ -27,7 +27,7 @@ npm install
 1. Expo
 
 ### Environment variables
-Create a .env file in the project's root directory with unique access and refresh secrets.
+Create a .env file in the project's root directory.
 ```
 EXPO_PUBLIC_API_ENDPOINT=https://jot-field-notes-back-end.onrender.com
 ```
