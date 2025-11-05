@@ -16,12 +16,13 @@ export default function LoginScreen({ navigation }) {
     const [password, setPassword] = useState("");
     const [frontEndErrorMsg, setFrontEndErrorMsg] = useState("");
 
+    // Added light input validation - didn't want to provide exact rules on front-end, this is just to reduce call to back-end.
     const handleLogin = () => {
         if (username.length < 3 || password.length < 3) {
             setFrontEndErrorMsg("Username and password must be at least 3 characters.");
             return;
         }
-        setFrontEndErrorMsg(""); // Clear local error before login
+        setFrontEndErrorMsg(""); // Clear error before login
         login(username, password);
     };
 

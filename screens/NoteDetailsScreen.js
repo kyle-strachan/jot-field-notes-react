@@ -17,6 +17,7 @@ export default function NoteDetailsScreen({ route, navigation }) {
   const { deleteNote } = useJot();
   const API_BASE = process.env.EXPO_PUBLIC_API_ENDPOINT;
 
+  // Get single note
   const fetchNote = async () => {
     try {
       setLoading(true);
@@ -34,6 +35,7 @@ export default function NoteDetailsScreen({ route, navigation }) {
     }
   };
 
+  // Rerun fetch. When returning from the edit screen this was required to force the screen to reflect the revised note.
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", fetchNote);
     return unsubscribe;
@@ -50,7 +52,7 @@ export default function NoteDetailsScreen({ route, navigation }) {
   if (!note) {
     return (
       <View style={styles.container}>
-        <Text style={{ color: "gray" }}>Note not found.</Text>
+        <Text>Note not found. Please try again.</Text>
       </View>
     );
   }
@@ -135,11 +137,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     backgroundColor: "#fff",
-  },
-  date: {
-    fontSize: 13,
-    color: "gray",
-    marginBottom: 15,
   },
   content: {
     fontSize: 15,

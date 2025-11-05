@@ -5,6 +5,7 @@ const Stack = createNativeStackNavigator();
 
 export default function AppStack() {
   return (
+    // Single screen stack that opens a tab navigator upon login
     <Stack.Navigator>
       <Stack.Screen
         name="JotFieldNotes"
