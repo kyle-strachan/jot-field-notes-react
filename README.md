@@ -1,7 +1,7 @@
 # Jot :: Field Notes Documentation
 
 A secure note-taking app using Node.js, Express, Expo, and MongoDB.
-This project has been converted from my mid-term note-taking app.
+This project has been converted from my midterm note-taking app.
 
 ## Features
 
@@ -27,7 +27,7 @@ npm install
 1. Expo
 
 ### Environment variables
-Create a .env file in the project's root directory.
+Create a `.env` file in the project's root directory.
 ```
 EXPO_PUBLIC_API_ENDPOINT=https://jot-field-notes-back-end.onrender.com
 ```
@@ -38,11 +38,10 @@ npx expo start
 ```
 
 ## API
-This project uses a live back end API service. Use the `EXPO_PUBLIC_API_ENDPOINT` to connect.
-
+This project uses a live back-end API service. Use the `EXPO_PUBLIC_API_ENDPOINT` to connect.
 
 ## API Endpoints
-The application uses server-rendered views with EJS, routes are designed in RESTful structure and HTTP methods (GET, POST, PUT, DELETE). All endpoints handle errors gracefully back to UI instead of JSON responses.
+The application uses an API service; all responses are in JSON format.
 
 ### Auth Routes
 
@@ -54,7 +53,7 @@ The application uses server-rendered views with EJS, routes are designed in REST
 
 ### Notes Routes (Protected)
 
-All routes require authentication via access token stored in HTTP-only cookies. Not intended as public API.
+All protected routes require authentication via a secure store token.
 
 | Method | Endpoint           | Description                      |
 |--------|--------------------|----------------------------------|
@@ -68,7 +67,7 @@ All routes require authentication via access token stored in HTTP-only cookies. 
 
 ## Reflection and development notes
 
-* Using my mid-term project, I split the project into a front and back-end project. The front end was entirely rebuilt with React Native.
+* Using my midterm project, I split the project into a front and back-end project. The front end was entirely rebuilt with React Native.
 * I experimented with using state variables to hold updated notes but came across inconsistencies between the live database and stale screens and therefore opted to refetch the notes when returning to the Dashboard each time.
 * I had inconsistent navigation headings and varying sizes due to mixed tab and stack headings. To correct this, I placed all screens inside a stack, even if they were a single page so that the header and back button show evenly.
 * This app was tested on Android, with a brief install on iOS. I have been unable to verify whether the keyboard no longer blocks the input fields on iOS but the problem was resolved on Android using `<KeyboardAwareScrollView>`.
