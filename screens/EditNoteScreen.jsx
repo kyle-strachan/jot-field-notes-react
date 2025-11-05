@@ -21,12 +21,13 @@ export default function EditNoteScreen({ route, navigation }) {
 
     const handleSave = () => {
 
-        // Opted to protect against only blank titles - for a very quick note the body might not be added.
+        // Opted to protect against only blank titles - for a very quick note the body might not be present.
         if (title.trim().length === 0) {
             Alert.alert("Missing title", "Please enter a title before saving.");
             return;
         }
 
+        // Allow user to keep the note's original location or update it to current
         Alert.alert(
             "Update Location",
             "Do you wish to update the note's location to your current location?",
@@ -46,7 +47,7 @@ export default function EditNoteScreen({ route, navigation }) {
                             setLon(updated.lon);
                             saveNote(updated.lat, updated.lon);
                         } else {
-                            saveNote(lat, lon); // fallback
+                            saveNote(lat, lon); // Use values from screen load (note's existing value)
                         }
                     },
                 },
@@ -67,7 +68,7 @@ export default function EditNoteScreen({ route, navigation }) {
                 lon: loc.coords.longitude,
             };
         } catch (err) {
-            console.log("Location error:", err.message);
+            Alert.alert("Location error", "Cannot retrieve location. Try again later.");
             return null;
         }
     }
