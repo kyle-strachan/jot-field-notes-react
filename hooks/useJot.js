@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { authFetch } from "../utils/authFetch"; // adjust path as needed
+import { useAuth } from "../context/AuthContext";
 
 export default function useJot() {
+  const { authFetch } = useAuth();
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -15,9 +16,7 @@ export default function useJot() {
     setError(null);
 
     try {
-      const res = await authFetch(`${API_BASE}/notes`, {
-        method: "GET",
-      });
+      const res = await authFetch(`${API_BASE}/notes`, { method: "GET" });
 
       if (!res.ok) throw new Error(`Fetch failed with status ${res.status}`);
 
@@ -47,7 +46,7 @@ export default function useJot() {
         credentials: "include",
       });
       if (!res.ok) throw new Error("Failed to delete note");
-      await fetchJots(); // Force refresh on main screen
+      await fetchJots();
     } catch (error) {
       console.log(`Delete has an error`, error);
     }
