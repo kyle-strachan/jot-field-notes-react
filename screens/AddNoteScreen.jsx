@@ -19,14 +19,16 @@ export default function AddNoteScreen({ navigation }) {
     const API_BASE = process.env.EXPO_PUBLIC_API_ENDPOINT;
 
     useEffect(() => {
+        // Keep updating location until save button
+
         let subscription;
 
-        const startWatching = async () => {
+        const startLocationWatch = async () => {
             const { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== "granted") {
                 Alert.alert(
                     "Permission denied",
-                    "Longitude and latitude cannot be retrieved without location access"
+                    "Longitude and latitude cannot be retrieved without location access."
                 );
                 return;
             }
@@ -44,8 +46,9 @@ export default function AddNoteScreen({ navigation }) {
             );
         };
 
-        startWatching();
+        startLocationWatch();
 
+        // Remove subscription to avoid 'update of unmounted component' error
         return () => {
             if (subscription) subscription.remove();
         };
@@ -53,7 +56,7 @@ export default function AddNoteScreen({ navigation }) {
 
     const handleSave = async () => {
 
-        // Opted to protect against only blank titles - for a very quick note the body might not be added.
+        // Opted to protect against only blank titles - for a very quick note the body might reasonably be blank.
         if (title.trim().length === 0) {
             Alert.alert("Missing title", "Please enter a title before saving.");
             return;
@@ -76,18 +79,26 @@ export default function AddNoteScreen({ navigation }) {
             }
 
             await res.json();
-
-            setTitle("");
-            setBody("");
-
+            handleClear();
             navigation.goBack();
         } catch (err) {
-            console.log("Save error:", err.message);
+            // Possibly Expo Go drops the connection, added this alert to try to narrow down issue
+            let message = "Please try again.";
+            if (res) {
+                try {
+                    const errorData = await res.json();
+                    message = errorData?.error || message;
+                } catch {
+                    // No valid JSON, ignore it.
+                }
+                Alert.alert("Save failed", `${message} (${res.status})`); // Adding the extra information if available.
+            } else {
+                Alert.alert("Save failed", message);
+            }
         } finally {
             setSaving(false);
         }
     };
-
 
     const handleClear = () => {
         setTitle("");
