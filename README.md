@@ -71,3 +71,4 @@ All protected routes require authentication via a secure store token.
 * I experimented with using state variables to hold updated notes but came across inconsistencies between the live database and stale screens and therefore opted to refetch the notes when returning to the Dashboard each time.
 * I had inconsistent navigation headings and varying sizes due to mixed tab and stack headings. To correct this, I placed all screens inside a stack, even if they were a single page so that the header and back button show evenly.
 * This app was tested on Android, with a brief install on iOS. I have been unable to verify whether the keyboard no longer blocks the input fields on iOS but the problem was resolved on Android using `<KeyboardAwareScrollView>`.
+* Basic front-end input validation has been implemented to reduce API calls; the back-end validates as per the midterm submission.
