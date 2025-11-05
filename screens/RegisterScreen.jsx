@@ -14,6 +14,16 @@ export default function RegisterScreen({ navigation }) {
     const { register, authErrorMsg } = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [frontEndErrorMsg, setFrontEndErrorMsg] = useState("");
+
+    const handleRegister = () => {
+        if (username.trim().length < 3 || password.trim().length < 3) {
+            setFrontEndErrorMsg("Username and password must be at least 3 characters.");
+            return;
+        }
+        setFrontEndErrorMsg(""); // Clear local error before register
+        register(username, password);
+    };
 
     return (
         <ScrollWrapper style={styles.scrollContent}>
@@ -31,6 +41,8 @@ export default function RegisterScreen({ navigation }) {
                     value={username}
                     onChangeText={setUsername}
                     returnKeyType="next"
+                    autoCapitalize="none"
+                    autoCorrect={false}
                 />
                 <TextInput
                     style={styles.textInput}
@@ -39,13 +51,17 @@ export default function RegisterScreen({ navigation }) {
                     onChangeText={setPassword}
                     secureTextEntry
                     returnKeyType="done"
+                    autoCapitalize="none"
+                    autoCorrect={false}
                 />
 
-                <Text style={styles.errorMsg}>{authErrorMsg}</Text>
+                <Text style={styles.errorMsg}>
+                    {frontEndErrorMsg || authErrorMsg}
+                </Text>
 
                 <CustomButton
                     title="Register"
-                    onPress={() => register(username, password)}
+                    onPress={handleRegister}
                     colorOverride={"#768d73ff"}
                 />
             </View>

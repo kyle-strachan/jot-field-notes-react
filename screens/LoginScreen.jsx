@@ -8,12 +8,22 @@ import {
 } from "react-native";
 import { useAuth } from "../context/AuthContext";
 import CustomButton from "../components/CustomButton";
-import ScrollWrapper from "../components/ScrollWrapper"; // adjust path if needed
+import ScrollWrapper from "../components/ScrollWrapper";
 
 export default function LoginScreen({ navigation }) {
     const { login, authErrorMsg, authSubmitting } = useAuth();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [frontEndErrorMsg, setFrontEndErrorMsg] = useState("");
+
+    const handleLogin = () => {
+        if (username.length < 3 || password.length < 3) {
+            setFrontEndErrorMsg("Username and password must be at least 3 characters.");
+            return;
+        }
+        setFrontEndErrorMsg(""); // Clear local error before login
+        login(username, password);
+    };
 
     return (
         <ScrollWrapper style={styles.scrollContent}>
@@ -41,12 +51,14 @@ export default function LoginScreen({ navigation }) {
                     returnKeyType="done"
                 />
 
-                <Text style={styles.errorMsg}>{authErrorMsg}</Text>
+                <Text style={styles.errorMsg}>
+                    {frontEndErrorMsg || authErrorMsg}
+                </Text>
 
                 <CustomButton
                     title={authSubmitting ? "Loading..." : "Login"}
                     disabled={authSubmitting}
-                    onPress={() => login(username, password)}
+                    onPress={handleLogin}
                     baseColor="#fff"
                     textColor="#768d73ff"
                 />

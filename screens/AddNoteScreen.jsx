@@ -52,6 +52,13 @@ export default function AddNoteScreen({ navigation }) {
     }, []);
 
     const handleSave = async () => {
+
+        // Opted to protect against only blank titles - for a very quick note the body might not be added.
+        if (title.trim().length === 0) {
+            Alert.alert("Missing title", "Please enter a title before saving.");
+            return;
+        }
+
         setSaving(true);
         try {
             const res = await fetch(`${API_BASE}/notes`, {
@@ -80,6 +87,7 @@ export default function AddNoteScreen({ navigation }) {
             setSaving(false);
         }
     };
+
 
     const handleClear = () => {
         setTitle("");

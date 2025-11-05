@@ -20,6 +20,13 @@ export default function EditNoteScreen({ route, navigation }) {
     const API_BASE = process.env.EXPO_PUBLIC_API_ENDPOINT;
 
     const handleSave = () => {
+
+        // Opted to protect against only blank titles - for a very quick note the body might not be added.
+        if (title.trim().length === 0) {
+            Alert.alert("Missing title", "Please enter a title before saving.");
+            return;
+        }
+
         Alert.alert(
             "Update Location",
             "Do you wish to update the note's location to your current location?",
