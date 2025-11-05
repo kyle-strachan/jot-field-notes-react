@@ -7,7 +7,7 @@ export default function ProfileStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Profile"
+        name="ProfileAccount"
         component={ProfileScreen}
         options={{ title: "Account", headerShown: true }}
       />
