@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 22,
+    fontSize: 17,
     fontWeight: "600",
     marginBottom: 10,
     borderWidth: 1,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   content: {
-    fontSize: 18,
+    fontSize: 15,
     lineHeight: 24,
     color: "#333",
     marginBottom: 40,
