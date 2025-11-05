@@ -16,12 +16,13 @@ export default function RegisterScreen({ navigation }) {
     const [password, setPassword] = useState("");
     const [frontEndErrorMsg, setFrontEndErrorMsg] = useState("");
 
+    // Added light input validation - didn't want to provide exact rules on front-end, this is just to reduce call to back-end.
     const handleRegister = () => {
         if (username.trim().length < 3 || password.trim().length < 3) {
             setFrontEndErrorMsg("Username and password must be at least 3 characters.");
             return;
         }
-        setFrontEndErrorMsg(""); // Clear local error before register
+        setFrontEndErrorMsg(""); // Clear front end error before register
         register(username, password);
     };
 
@@ -79,7 +80,7 @@ export default function RegisterScreen({ navigation }) {
     );
 }
 
-// #768d73ff - green
+// #768d73ff - app green
 
 const styles = StyleSheet.create({
     scrollContent: {

@@ -36,7 +36,7 @@ export default function JotDashboardScreen() {
                 )}
                 ListEmptyComponent={
                     !loading && (
-                        <View style={{ alignItems: "center", marginTop: 40 }}>
+                        <View style={styles.emptyNotesContainer}>
                             <Text style={styles.emptyNotes}>Use <Text style={styles.emptyNotesBold}>New Observation</Text> to start recording observations.</Text>
                         </View>
                     )
@@ -51,6 +51,10 @@ const styles = StyleSheet.create({
         backgroundColor: "#ecf0ecff",
         flex: 1,
         padding: 20,
+    },
+    emptyNotesContainer: {
+        alignItems: "center",
+        marginTop: 40,
     },
     emptyNotes: {
         fontSize: 12,
