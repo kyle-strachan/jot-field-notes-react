@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Jot :: Field Notes",
+    "slug": "jot-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/notebook-green.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/notebook-green.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/notebook-green.png",
+        "backgroundColor": "#ffffff00"
+      },
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/notebook-green.png"
+    }
+  }
+}
